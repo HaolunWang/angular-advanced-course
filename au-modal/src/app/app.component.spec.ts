@@ -9,7 +9,7 @@ import {AuInputModule} from "au-input";
 import {AuTabPanelModule} from "au-tab-panel";
 import {AuModalModule} from "./au-modal/au-modal.module";
 
-
+// running test cases in this file by using ng test --watch=false, watch is false means ensure running the tests ONLY ONCE
 
 describe('AppComponent', () => {
 

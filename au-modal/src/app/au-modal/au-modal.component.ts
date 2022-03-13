@@ -31,6 +31,7 @@ export class AuModalComponent implements OnInit {
 
     ngOnInit() {
 
+        // event listener for hitting escape esc key on keyboard
         this.eventManager.addGlobalEventListener("window",'keyup.esc', () => {
             if (this.hideOnEsc) {
                 console.log("Close event is monitored in ngOnInit of au modal component");
@@ -41,8 +42,9 @@ export class AuModalComponent implements OnInit {
     }
 
 
-    onClickOutsideModal() { // not triggered when click area outside modal
-        if (this.hideOnClickOutside) {
+    onClickOutsideModal() {
+        if (this.hideOnClickOutside) { 
+            // not triggered close() method below when click outside area modal as [hideOnClickOutside] in app component html is false
             console.log("onClickOutsideModal method in au modal component is triggered");
             this.close();
         }

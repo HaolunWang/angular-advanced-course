@@ -24,7 +24,7 @@ export class AuModalModule {
 
 
 
-    static forRoot():  ModuleWithProviders{
+    static forRoot():  ModuleWithProviders{ // AuModalService is globally used
         return {
             ngModule: AuModalModule,
             providers: [AuModalService]

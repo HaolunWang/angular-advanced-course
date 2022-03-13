@@ -49,7 +49,12 @@ export class AuModalOpenOnClickDirective implements OnInit, OnDestroy {
             console.log("els doesn't have length as it is not an array: " + els);
             this.elements = [els];
         }
-
+        // previously:
+        // this.elements.forEach(el => el.addEventListener('click', () => {
+        //     this.viewContainer.clear();
+        //     this.viewContainer.createEmbeddedView(this.templateRef);
+        // }));
+        // above is equivalent to below
         this.elements.forEach(el => el.addEventListener('click', this.clickHandler));
     }
 

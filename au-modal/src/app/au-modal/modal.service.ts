@@ -14,6 +14,6 @@ export class AuModalService {
 
     close() {
         console.log("close method in au modal service is triggered");
-        this.subject.next(); // next() trigger viewContainer.clear() after close$ observable's subscribe in au modal directive
+        this.subject.next(); // next() triggers viewContainer.clear() func after close$ observable's subscribe in au modal directive
     }
 }
