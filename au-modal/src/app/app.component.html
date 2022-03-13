@@ -82,7 +82,7 @@
         <au-modal class="auth-modal" [body]="authModalBody"></au-modal>
     </ng-template> -->
     <!-- body syntax is passing a property authModalBody to a component (entrance is body input) -->
-    <!-- ng-template tag has the input ngIf, so use [ngIf], same as above, au-modal tag has the input body, so use [body]-->
+    <!-- ng-template itself has the input ngIf, so use [ngIf], same as au-modal, au-modal has the input body, so use [body]-->
 
 
     <au-modal id="testModal" *auModalOpenOnClick="testButton"></au-modal>

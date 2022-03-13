@@ -19,15 +19,17 @@ export class AuModalOpenOnClickDirective implements OnInit, OnDestroy {
 
     elements: HTMLBaseElement[];
 
-    constructor(private templateRef: TemplateRef<any>,
-                private viewContainer: ViewContainerRef,
+    constructor(private templateRef: TemplateRef<any>, // for directive can be used in ng template
+                private viewContainer: ViewContainerRef, // viewContainer represents a container where one or more views can be attached
                 private modalService: AuModalService) {
 
     }
 
     ngOnInit() {
-
-        this.modalService.close$.subscribe(() => this.viewContainer.clear());
+        console.log("close$ observable in au modal directive is subscribed");
+        this.modalService.close$.subscribe(() => 
+        this.viewContainer.clear()
+        ); // for running the observable close$ and doing the close modal ACTION
 
     }
 
@@ -40,9 +42,11 @@ export class AuModalOpenOnClickDirective implements OnInit, OnDestroy {
     set auModalOpenOnClick(els) {
 
         if (els.length) {
+            console.log("els has length: " + els.length);
             this.elements = els;
         }
         else {
+            console.log("els doesn't have length as it is not an array: " + els);
             this.elements = [els];
         }
 

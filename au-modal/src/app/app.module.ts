@@ -7,7 +7,7 @@ import {AuInputModule} from 'au-input';
 import {AuTabPanelModule} from "au-tab-panel";
 import {AuModalModule} from "./au-modal/au-modal.module";
 import {HttpClientModule} from "@angular/common/http";
-
+// include module, and module includes component
 
 @NgModule({
   declarations: [

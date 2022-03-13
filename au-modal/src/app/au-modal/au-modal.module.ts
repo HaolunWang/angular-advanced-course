@@ -16,6 +16,7 @@ import {AuModalService} from "./modal.service";
     CommonModule
   ],
   exports: [AuModalComponent, AuModalOpenOnClickDirective] 
+  // module includes the component
   // the component or directive should be in the declarations and exports at the same time
   // otherwise, they would not work.
 })

@@ -33,6 +33,7 @@ export class AuModalComponent implements OnInit {
 
         this.eventManager.addGlobalEventListener("window",'keyup.esc', () => {
             if (this.hideOnEsc) {
+                console.log("Close event is monitored in ngOnInit of au modal component");
                 this.close();
             }
         });
@@ -40,19 +41,21 @@ export class AuModalComponent implements OnInit {
     }
 
 
-    onClickOutsideModal() {
+    onClickOutsideModal() { // not triggered when click area outside modal
         if (this.hideOnClickOutside) {
+            console.log("onClickOutsideModal method in au modal component is triggered");
             this.close();
         }
 
     }
 
     close() {
+        console.log("close method in au modal component is triggered");
         this.modalService.close();
     }
 
 
-    cancelClick(evt: KeyboardEvent) {
+    cancelClick(evt: KeyboardEvent) { // for preventing the email/password inputs from being clicked and closing the modal
         evt.preventDefault();
         evt.stopPropagation();
     }
