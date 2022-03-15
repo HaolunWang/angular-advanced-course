@@ -26,6 +26,8 @@ export class AuMaskDirective implements OnInit {
 
     fullFieldSelected = false;
 
+    charstest = []; // for test
+
     constructor(el: ElementRef) {
 
         this.input = el.nativeElement;
@@ -159,14 +161,25 @@ export class AuMaskDirective implements OnInit {
     }
 
 
-    buildPlaceHolder(): string {
+    buildPlaceHolder(): string { // : string means this method should return a string
 
+        this.charstest = this.mask.split(''); 
+        // if charstest is number, there is an error: Type 'string[]' is not assignable to type 'number'.
+        console.log("typeof charstest: " + typeof this.charstest + "\ncharstest: " + this.charstest);
+        this.charstest.forEach(function(value) {
+            console.log("each value in charstest: " + value);
+        });
+        
         const chars = this.mask.split('');
+        // so chars is an array
 
         return chars.reduce((result, char) => {
 
             return result +=
                 includes(SPECIAL_CHARACTERS, char) ? char : '_'
+                // means if current char is included in the SPECIAL_CHARACTERS array, 
+                // if current char is one in SPECIAL_CHARACTERS, use special characters
+                // if not, then use underscore character
 
         }, '');
 

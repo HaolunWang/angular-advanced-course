@@ -34,6 +34,7 @@ export class AuModalOpenOnClickDirective implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        console.log("OnDestory: remove event listener");
         this.elements.forEach(el => el.removeEventListener('click', this.clickHandler));
     }
 

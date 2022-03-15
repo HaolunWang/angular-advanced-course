@@ -10,7 +10,7 @@ export const  TAB = 9,
     DELETE = 46;
 
 export const SPECIAL_CHARACTERS = [" ", "/", "(", ")", "+", "\/", "-"];
-
+// "\/" means "\"
 
 
 export function overWriteCharAtPosition(input:HTMLInputElement,
