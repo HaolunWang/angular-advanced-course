@@ -20,7 +20,7 @@ import {maskDigitValidators, neverValidator} from "./digit_validators";
 export class AuMaskDirective implements OnInit {
 
     @Input('au-mask')
-    mask = '';
+    mask = ''; // mask is from value of au-mask for example <input au-mask="(999) 999-9999"> in app.component.html
 
     input: HTMLInputElement;
 
@@ -40,7 +40,7 @@ export class AuMaskDirective implements OnInit {
 
     }
 
-    @HostListener('select', ['$event'])
+    @HostListener('select', ['$event']) // detect if select event is fired
     onSelect($event:UIEvent) {
 
         this.fullFieldSelected = this.input.selectionStart == 0 &&
@@ -48,15 +48,15 @@ export class AuMaskDirective implements OnInit {
 
     }
 
-    @HostListener("keydown", ['$event', '$event.keyCode'])
-    onKeyDown($event: KeyboardEvent, keyCode) {
+    @HostListener("keydown", ['$event', '$event.keyCode']) // automatically detect keydown event
+    onKeyDown($event: KeyboardEvent, keyCode) { // prevent the keyboard hitting override the default underscore
 
         if ($event.metaKey || $event.ctrlKey) {
             return;
         }
 
         if (keyCode !== TAB) {
-            $event.preventDefault();
+            $event.preventDefault(); // take over all the behaviour of input box
         }
 
         const key = String.fromCharCode(keyCode),
@@ -64,8 +64,8 @@ export class AuMaskDirective implements OnInit {
 
 
         if (this.fullFieldSelected) {
-
-            this.input.value = this.buildPlaceHolder();
+            // if fullFieldSelected is true
+            this.input.value = this.buildPlaceHolder(); // resetting the field, initialization as ngOnInit()
 
             const firstPlaceholderPos = findIndex(this.input.value,
                 char => char === '_');
@@ -79,7 +79,7 @@ export class AuMaskDirective implements OnInit {
             case LEFT_ARROW:
                 this.handleLeftArrow(cursorPos);
 
-                return;
+                return; // return here from the onKeyDown method
 
             case RIGHT_ARROW:
 
@@ -102,9 +102,12 @@ export class AuMaskDirective implements OnInit {
         }
 
         const maskDigit = this.mask.charAt(cursorPos),
-            digitValidator = maskDigitValidators[maskDigit] || neverValidator;
+            digitValidator = maskDigitValidators[maskDigit] || neverValidator; // neverValidator is any special character input and not included in au-mask
+            // maskDigit is from au-mask at cursor position
+            // digitValidator is to select a validating method based on the value of cursor position from the au-mask
 
         if (digitValidator(key)) {
+            // digitValidator(key) is to pass the keycode to the validating method and see if matched with the value in validating method
 
             overWriteCharAtPosition(this.input, cursorPos, key);
 
@@ -135,6 +138,7 @@ export class AuMaskDirective implements OnInit {
 
         if (previousPos >= 0) {
             this.input.setSelectionRange(previousPos, previousPos);
+            // set the previous position before the cursor position if hit left arrow keycode
         }
     }
 
@@ -149,8 +153,13 @@ export class AuMaskDirective implements OnInit {
     handleRightArrow(cursorPos) {
         const valueAfterCursor = this.input.value.slice(cursorPos + 1);
 
+        console.log("valueAfterCursor: " + valueAfterCursor);
         const nextPos =
             findIndex(valueAfterCursor, char => !includes(SPECIAL_CHARACTERS, char) );
+            // find the first position where not contains SPECIAL_CHARACTERS
+            // if met dash '-', valueAfterCursor is like '-____ ____ ____ ____', nextPos is 1
+            // if just met underscore '_', valueAfterCursor is like '_-____ ____ ____ ____', nextPos is 0
+        console.log("nextPos: " + nextPos);
 
         if (nextPos >= 0) {
 
@@ -164,7 +173,7 @@ export class AuMaskDirective implements OnInit {
     buildPlaceHolder(): string { // : string means this method should return a string
 
         this.charstest = this.mask.split(''); 
-        // if charstest is number, there is an error: Type 'string[]' is not assignable to type 'number'.
+        // if charstest is number[], there is an error: Type 'string[]' is not assignable to type 'number[]'.
         console.log("typeof charstest: " + typeof this.charstest + "\ncharstest: " + this.charstest);
         this.charstest.forEach(function(value) {
             console.log("each value in charstest: " + value);
