@@ -86,6 +86,10 @@
 
 
     <au-modal [@fadeInOut] *auModalOpenOnClick="paymentModal" [body]="modalBody">
+        <!-- auModalOpenOnClick is structural directive in node_modules dependencies
+        [@fadeInOut] is from app.component.ts animations -->
+        <!-- (@fadeInOut.start) is to test if @fadeInOut is triggered
+        (@fadeInOut.done) is to test if @fadeInOut is called and finished -->
 
 
     </au-modal>
